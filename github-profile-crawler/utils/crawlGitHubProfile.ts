@@ -5,22 +5,26 @@ import { parseCountValue } from './parseCountValue';
 
 export const crawlGitHubProfile = async (
   page: Page,
+  username: string,
   profileUrl: string
 ): Promise<GitHubProfile> => {
   await page.goto(profileUrl, { waitUntil: 'domcontentloaded' });
 
-  // URL에서 유저 이름 가져오기
-  const username = profileUrl.split('/').pop() || '';
-
   // 팔로워, 팔로잉 수 알아내기
-  const followersText =
-    (await page
-      .locator('a[href$="?tab=followers"] span.text-bold')
-      .textContent()) || '0';
-  const followingText =
-    (await page
-      .locator('a[href$="?tab=following"] span.text-bold')
-      .textContent()) || '0';
+  let followersText = '';
+  const followersLocation = await page.locator(
+    'a[href$="?tab=followers"] span.text-bold'
+  );
+  if (await followersLocation.isVisible()) {
+    followersText = (await followersLocation.textContent()) || '0';
+  }
+  let followingText = '';
+  const followingLocation = await page.locator(
+    'a[href$="?tab=following"] span.text-bold'
+  );
+  if (await followingLocation.isVisible()) {
+    followingText = (await followingLocation.textContent()) || '0';
+  }
 
   // 사람 수 데이터 전처리
   const followers = parseCountValue(followersText);
@@ -28,14 +32,12 @@ export const crawlGitHubProfile = async (
 
   // README 긁어오기
   let readme = '';
-  try {
-    readme = (await page.locator('article.markdown-body').innerText()) || '';
-  } catch (error) {
-    console.log(`Could not find README for ${username}`);
+  const readmeElement = await page.locator('article.markdown-body').first();
+  if (await readmeElement.isVisible()) {
+    readme = (await readmeElement.innerText()) || '';
   }
 
   // 스타 레포지토리 긁어오기
-  // TODO: FIX
   await page.goto(`${profileUrl}?tab=stars`, { waitUntil: 'domcontentloaded' });
 
   const starredRepos: string[] = [];
