@@ -6,7 +6,7 @@ const timer = () => {
 
   return () => {
     clearInterval(interval);
-    console.log(`소요 시간: ${time}초`);
+    console.log(`소요 시간: ${time % 60}분 ${time % 60}초`);
   };
 };
 

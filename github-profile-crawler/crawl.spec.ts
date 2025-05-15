@@ -35,6 +35,9 @@ async function main() {
       profiles.push(profile);
     }
 
+    console.log(
+      `${profileData.length}개의 유저 데이터 중 유효한 ${profiles.length}개의 프로필을 크롤링했어요!`
+    );
     stopTimer();
 
     await saveToCSV(profiles);
