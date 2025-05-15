@@ -4,7 +4,7 @@ import { GitHubProfile } from './types';
 import { crawlGitHubProfile } from './utils/crawlGitHubProfile';
 import { saveToCSV } from './utils/saveToCSV';
 import { getGitHubUserList } from './utils/getGitHubUserList';
-import timer from './utils/timer';
+import stopWatch from './utils/stopWatch';
 
 async function main() {
   console.log('🚀 크롤링을 시작해요!');
@@ -23,9 +23,10 @@ async function main() {
   try {
     const profiles: GitHubProfile[] = [];
 
-    const stopTimer = timer();
+    const { stop, lap } = stopWatch();
 
     for (const [index, data] of profileData.entries()) {
+      if (index % 10 === 0 && index !== 0) lap();
       console.log(
         `[${((index / profileData.length) * 100).toFixed(2)}%] 크롤링 유저: ${
           data.login
@@ -38,7 +39,7 @@ async function main() {
     console.log(
       `${profileData.length}개의 유저 데이터 중 유효한 ${profiles.length}개의 프로필을 크롤링했어요!`
     );
-    stopTimer();
+    stop();
 
     await saveToCSV(profiles);
   } catch (error) {
