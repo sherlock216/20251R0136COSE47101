@@ -36,7 +36,7 @@ const processData = async (
       }
     }
     for (const repo of user.starredRepos) {
-      if (repo.size > 500 && repo.language && isLanguage(repo.language)) {
+      if (repo.language && isLanguage(repo.language)) {
         languageCount[repo.language] += 1;
       }
     }

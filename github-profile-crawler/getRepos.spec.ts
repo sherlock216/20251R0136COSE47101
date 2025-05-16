@@ -36,10 +36,11 @@ async function main() {
     const starredRepos = await getGitHubReposList(
       user.starred_url.split('{')[0]
     );
+    const filteredStarredRepos = starredRepos.filter(repo => repo.size > 500);
     usersDataWithRepos.push({
       ...user,
       repos: filteredRepos.slice(0, 10),
-      starredRepos: starredRepos.slice(0, 10),
+      starredRepos: filteredStarredRepos.slice(0, 10),
     });
   }
 
