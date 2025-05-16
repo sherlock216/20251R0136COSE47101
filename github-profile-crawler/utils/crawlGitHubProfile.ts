@@ -7,8 +7,11 @@ export const crawlGitHubProfile = async (
   page: Page,
   username: string,
   profileUrl: string
-): Promise<GitHubProfile> => {
+): Promise<GitHubProfile | undefined> => {
   await page.goto(profileUrl, { waitUntil: 'domcontentloaded' });
+
+  // TODO: 404 페이지 체크 - 블락 버튼이 없다면 유효하지 않은 프로필
+  const blockButton = await page.getByText('Block or Report');
 
   // 팔로워, 팔로잉 수 알아내기
   let followersText = '';
