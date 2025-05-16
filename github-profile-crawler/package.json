@@ -5,7 +5,9 @@
   "scripts": {
     "get-users": "npx ts-node ./getUsers.spec.ts",
     "get-repos": "npx ts-node ./getRepos.spec.ts",
-    "start": "npm run get-users && npm run get-repos"
+    "get-csv": "npx ts-node ./getCSV.spec.ts",
+    "add-csv": "npx ts-node ./addCSV.spec.ts",
+    "start": "npm run get-users && npm run get-repos && npm run get-csv && npm run add-csv"
   },
   "keywords": [],
   "author": "",
