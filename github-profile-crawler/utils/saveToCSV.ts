@@ -2,9 +2,18 @@ import { CSVInterface, languages } from '../types';
 import * as fs from 'fs';
 import * as path from 'path';
 
-export const saveToCSV = async (profiles: CSVInterface[], isAdd?: boolean) => {
+interface SaveToCSVProps {
+  profiles: CSVInterface[];
+  dataSize: number;
+  preset: number;
+}
+export const saveToCSV = async ({
+  profiles,
+  dataSize,
+  preset,
+}: SaveToCSVProps) => {
   // 헤더 열 정의
-  let csvContent = isAdd ? '' : `유저 ID, ${languages.join(', ')}\n`;
+  let csvContent = `유저 ID, ${languages.join(', ')}\n`;
 
   // 프로필 추가
   for (const profile of profiles) {
@@ -16,11 +25,11 @@ export const saveToCSV = async (profiles: CSVInterface[], isAdd?: boolean) => {
   }
 
   // root 디렉토리에 저장하기
-  const filePath = path.join('./results/github_profiles.csv');
-  if (isAdd) {
-    fs.appendFileSync(filePath, csvContent);
-  } else {
-    fs.writeFileSync(filePath, csvContent);
-  }
+  const filePath = path.join(
+    `./results/github_profiles_${preset + 1}-${preset + dataSize}.csv`
+  );
+
+  fs.writeFileSync(filePath, csvContent);
+
   console.log(`CSV file이 저장되었어요! : ${filePath}`);
 };

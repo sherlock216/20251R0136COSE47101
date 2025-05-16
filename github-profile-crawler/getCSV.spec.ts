@@ -19,7 +19,11 @@ async function main() {
 
   const processedData = await processData(userList);
 
-  saveToCSV(processedData);
+  saveToCSV({
+    profiles: processedData,
+    dataSize: Number(process.env.DATA_SIZE || '100'),
+    preset: Number(process.env.ID_PRESET || '58812280'),
+  });
 }
 
 main().catch(console.error);
