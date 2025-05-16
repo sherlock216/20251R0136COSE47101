@@ -38,8 +38,8 @@ async function main() {
     );
     usersDataWithRepos.push({
       ...user,
-      repos: filteredRepos.splice(0, 10),
-      starredRepos: starredRepos.splice(0, 10),
+      repos: filteredRepos.slice(0, 10),
+      starredRepos: starredRepos.slice(0, 10),
     });
   }
 
