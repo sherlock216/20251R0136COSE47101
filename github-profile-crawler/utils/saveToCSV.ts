@@ -8,10 +8,7 @@ export const saveToCSV = async (profiles: CSVInterface[], isAdd?: boolean) => {
 
   // 프로필 추가
   for (const profile of profiles) {
-    let row = `${profile.username},`;
-    for (const language of languages) {
-      row += `${profile[language]},`;
-    }
+    const row = [profile.username, ...languages.map(language => profile[language])].join(",");
     csvContent += `${row}\n`;
   }
 
