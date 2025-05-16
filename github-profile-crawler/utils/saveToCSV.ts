@@ -4,13 +4,13 @@ import * as path from 'path';
 
 interface SaveToCSVProps {
   profiles: CSVInterface[];
-  dataSize: number;
-  preset: number;
+  startIndex: number;
+  endIndex: number;
 }
 export const saveToCSV = async ({
   profiles,
-  dataSize,
-  preset,
+  startIndex,
+  endIndex,
 }: SaveToCSVProps) => {
   // 헤더 열 정의
   let csvContent = `유저 ID, ${languages.join(', ')}\n`;
@@ -26,7 +26,7 @@ export const saveToCSV = async ({
 
   // root 디렉토리에 저장하기
   const filePath = path.join(
-    `./results/github_profiles_${preset + 1}-${preset + dataSize}.csv`
+    `./results/github_profiles_${startIndex}-${endIndex}.csv`
   );
 
   fs.writeFileSync(filePath, csvContent);

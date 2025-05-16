@@ -21,8 +21,8 @@ async function main() {
 
   saveToCSV({
     profiles: processedData,
-    dataSize: Number(process.env.DATA_SIZE || '100'),
-    preset: Number(process.env.ID_PRESET || '58812280'),
+    startIndex: Number(process.env.ID_PRESET || '58812280'),
+    endIndex: userList[userList.length - 1].id,
   });
 }
 

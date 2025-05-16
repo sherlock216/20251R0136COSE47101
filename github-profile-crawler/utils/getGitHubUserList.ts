@@ -15,13 +15,15 @@ const fetchData = async (
 
 export const getGitHubUserList = async (preset: number, dataSize: number) => {
   const profileData: GitHubUser[] = [];
+  let lastIndex = preset;
 
   for (let i = 0; i < Math.floor(dataSize / 100); i++) {
-    const data = await fetchData(preset + i * 100, 100);
+    const data = await fetchData(lastIndex, 100);
     if (typeof data === 'object' && 'message' in data) {
       console.log('API 호출 오류 발생: ' + data.message);
       return [];
     }
+    lastIndex = data[data.length - 1].id;
     profileData.push(...data);
   }
 
