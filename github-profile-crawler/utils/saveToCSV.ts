@@ -4,11 +4,14 @@ import * as path from 'path';
 
 export const saveToCSV = async (profiles: CSVInterface[], isAdd?: boolean) => {
   // 헤더 열 정의
-  let csvContent = `유저 ID, ${languages.join(', ')}\n`;
+  let csvContent = isAdd ? '' : `유저 ID, ${languages.join(', ')}\n`;
 
   // 프로필 추가
   for (const profile of profiles) {
-    const row = [profile.username, ...languages.map(language => profile[language])].join(",");
+    const row = [
+      profile.username,
+      ...languages.map(language => profile[language]),
+    ].join(',');
     csvContent += `${row}\n`;
   }
 
