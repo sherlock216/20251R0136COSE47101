@@ -16,6 +16,7 @@ ID_PRESET=100000000
 
 - `npm run get-users` ㄱㄱ
 - `npm run get-repos` ㄱㄱ (위에꺼 먼저해야됨)
+- 두번 입력하기 귀찮으면 `npm run start` ㄱㄱ
 
 ## 전반적 프로세스
 
@@ -51,3 +52,23 @@ ID_PRESET=100000000
 
 - 생각보다 유령 유저가 개많음 < 거의 95%는 유령인듯. 그래서 불필요한 API 콜이 꽤 생길 수 밖에 없음
 - 커밋에 포함되는 코드 수정 내역 (문자열) 데이터까지는 모두 긁어오려면 시간 꽤 소요될듯 (꼭 필요하다면 불가능한건 아님)
+
+## 언어 목록
+
+- Assembly
+- C
+- C++
+- C#
+- Dart
+- Go
+- Java
+- JavaScript
+- Kotlin
+- MATLAB
+- PHP
+- Python
+- Ruby
+- Rust
+- Scala
+- Swift
+- TypeScript

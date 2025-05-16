@@ -1,11 +1,7 @@
 import fs from 'fs';
 import 'dotenv/config';
 
-import { chromium, Browser } from 'playwright';
-import { GitHubProfile, GitHubRepository, GitHubUser } from './types';
-import { crawlGitHubProfile } from './utils/crawlGitHubProfile';
-import { saveToCSV } from './utils/saveToCSV';
-import { getGitHubUserList } from './utils/getGitHubUserList';
+import { GitHubRepository, GitHubUser, UsersDataWithRepos } from './types';
 import stopWatch from './utils/stopWatch';
 import { getGitHubReposList } from './utils/getGitHubReposList';
 
@@ -21,10 +17,7 @@ async function main() {
     return;
   }
 
-  const usersDataWithRepos: (GitHubUser & {
-    repos: GitHubRepository[];
-    starredRepos: GitHubRepository[];
-  })[] = [];
+  const usersDataWithRepos: UsersDataWithRepos[] = [];
 
   const { stop, lap } = stopWatch();
 
@@ -38,13 +31,14 @@ async function main() {
     );
 
     const repos = await getGitHubReposList(user.repos_url);
-    if (repos.length === 0) continue;
+    const filteredRepos = repos.filter(repo => repo.size > 500);
+    if (filteredRepos.length < 3) continue;
     const starredRepos = await getGitHubReposList(
       user.starred_url.split('{')[0]
     );
     usersDataWithRepos.push({
       ...user,
-      repos: repos.splice(0, 10),
+      repos: filteredRepos.splice(0, 10),
       starredRepos: starredRepos.splice(0, 10),
     });
   }

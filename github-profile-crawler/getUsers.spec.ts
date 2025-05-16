@@ -1,12 +1,7 @@
 import fs from 'fs';
 import 'dotenv/config';
 
-import { chromium, Browser } from 'playwright';
-import { GitHubProfile } from './types';
-import { crawlGitHubProfile } from './utils/crawlGitHubProfile';
-import { saveToCSV } from './utils/saveToCSV';
 import { getGitHubUserList } from './utils/getGitHubUserList';
-import stopWatch from './utils/stopWatch';
 
 const ID_PRESET = parseInt(process.env.ID_PRESET || '58812280');
 

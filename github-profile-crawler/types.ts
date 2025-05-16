@@ -1,10 +1,32 @@
 // TODO: 긁어올 데이터 정하기
-export interface GitHubProfile {
+export const languages = [
+  'Assembly',
+  'C',
+  'C++',
+  'C#',
+  'Dart',
+  'Go',
+  'Java',
+  'JavaScript',
+  'Kotlin',
+  'MATLAB',
+  'PHP',
+  'Python',
+  'Ruby',
+  'Rust',
+  'Scala',
+  'Swift',
+  'TypeScript',
+] as const;
+
+export type Language = (typeof languages)[number];
+
+export type LanguageCount = {
+  [key in Language]: number;
+};
+
+export interface CSVInterface extends LanguageCount {
   username: string;
-  followers: number;
-  following: number;
-  readme: string;
-  starredRepos: string[];
 }
 
 export interface GitHubUser {
@@ -81,3 +103,12 @@ export interface GitHubRepository {
   watchers: number;
   default_branch: string;
 }
+
+export type UsersDataWithRepos = GitHubUser & {
+  repos: GitHubRepository[];
+  starredRepos: GitHubRepository[];
+};
+
+export const isLanguage = (language: string): language is Language => {
+  return languages.includes(language as Language);
+};
