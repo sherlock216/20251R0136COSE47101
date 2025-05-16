@@ -15,7 +15,7 @@ ID_PRESET=100000000
 ```
 
 - `npm run get-users` ㄱㄱ
-- `npm run get-repos` ㄱㄱ
+- `npm run get-repos` ㄱㄱ (위에꺼 먼저해야됨)
 
 ## 전반적 프로세스
 
