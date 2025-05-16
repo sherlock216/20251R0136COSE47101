@@ -42,7 +42,11 @@ async function main() {
     const starredRepos = await getGitHubReposList(
       user.starred_url.split('{')[0]
     );
-    usersDataWithRepos.push({ ...user, repos, starredRepos });
+    usersDataWithRepos.push({
+      ...user,
+      repos: repos.splice(0, 10),
+      starredRepos: starredRepos.splice(0, 10),
+    });
   }
 
   console.log(
