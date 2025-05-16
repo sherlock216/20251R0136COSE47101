@@ -7,7 +7,7 @@ const fetchData = async (
   per_page: number
 ): Promise<GitHubUser[] | { message: string }> => {
   const response = await fetch(
-    `https://api.github.com/users?since=${since}?per_page=${per_page}`,
+    `https://api.github.com/users?since=${since}&per_page=${per_page}`,
     getRequestHeader()
   );
   return response.json();
