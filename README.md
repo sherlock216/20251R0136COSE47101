@@ -2,19 +2,22 @@
 
 Repository for 2025 Spring Semester Data Science(COSE471) assignments
 
-## 예상 스택
+## Project Overview
 
-- 서버/백엔드 (Server/Backend)
-- 웹 프론트엔드 (Frontend)
-- 웹 풀스택 (Web Fullstack)
-- 머신러닝/인공지능
-- 데이터 엔지니어링/분석
-- 안드로이드 앱
-- iOS 앱
-- 시스템 소프트웨어
-- 데브옵스
-- 임베디드 소프트웨어
-- 게임 클라이언트
-- 게임 서버
-- 블록체인
-- 인터넷 보안
+This repository contains project assignments for the Data Science (COSE471) course at Korea University, Spring 2025.
+
+The project aims to collect and analyze GitHub user profiles to derive meaningful insights from the data.
+
+## Contributor
+
+| Profile                                                                  | 이름   | GitHub                                             |
+| ------------------------------------------------------------------------ | ------ | -------------------------------------------------- |
+| <img src="https://github.com/sherlock216.png" width="50" height="50" >   | 안효준 | [@sherlock216](https://github.com/sherlock216)     |
+| <img src="https://github.com/GunminKim.png" width="50" height="50" >     | 김건민 | [@GunminKim](https://github.com/GunminKim)         |
+| <img src="https://github.com/junhyoung1017.png" width="50" height="50" > | 이준형 | [@junhyoung1017](https://github.com/junhyoung1017) |
+| <img src="https://github.com/skytree82.png" width="50" height="50" >     | 최정규 | [@skytree82](https://github.com/skytree82)         |
+| <img src="https://github.com/halionaz.png" width="50" height="50" >      | 하승준 | [@halionaz](https://github.com/halionaz)           |
+
+## P.S.
+
+🔥 고컴에어공군 홧팅
