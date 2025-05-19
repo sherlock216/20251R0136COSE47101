@@ -7,7 +7,9 @@
     "get-repos": "npx ts-node ./getRepos.spec.ts",
     "get-csv": "npx ts-node ./getCSV.spec.ts",
     "merge-data": "npx ts-node ./mergeData.spec.ts",
-    "start": "npm run get-users && npm run get-repos && npm run get-csv && npm run merge-data"
+    "start": "npm run get-users && npm run get-repos && npm run get-csv && npm run merge-data",
+    "resume:repos": "npm run get-repos && npm run get-csv && npm run merge-data",
+    "resume:csv": "npm run get-csv && npm run merge-data"
   },
   "keywords": [],
   "author": "",
