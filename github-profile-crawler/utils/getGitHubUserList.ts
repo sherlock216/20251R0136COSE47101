@@ -26,6 +26,14 @@ export const getGitHubUserList = async (preset: number, dataSize: number) => {
     lastIndex = data[data.length - 1].id;
     profileData.push(...data);
   }
+  if (dataSize % 100 !== 0) {
+    const data = await fetchData(lastIndex, dataSize % 100);
+    if (typeof data === 'object' && 'message' in data) {
+      console.log('API 호출 오류 발생: ' + data.message);
+      return [];
+    }
+    profileData.push(...data);
+  }
 
   const filteredData = profileData.filter(
     (user: GitHubUser) =>

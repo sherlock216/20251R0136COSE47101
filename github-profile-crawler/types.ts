@@ -27,6 +27,8 @@ export type LanguageCount = {
 
 export interface CSVInterface extends LanguageCount {
   username: string;
+  userID: number;
+  repoCount: number;
 }
 
 export interface GitHubUser {
@@ -106,7 +108,6 @@ export interface GitHubRepository {
 
 export type UsersDataWithRepos = GitHubUser & {
   repos: GitHubRepository[];
-  starredRepos: GitHubRepository[];
 };
 
 export const isLanguage = (language: string): language is Language => {
