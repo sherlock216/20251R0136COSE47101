@@ -48,7 +48,9 @@ async function main() {
   console.log(
     `${userList.length}개의 유저 데이터 중 유효한 ${usersDataWithRepos.length}개의 프로필을 크롤링했어요!`
   );
-  console.log(`종합 수율: ${(usersDataWithRepos.length / DATA_SIZE) * 100}%`);
+  console.log(
+    `수율: ${((usersDataWithRepos.length / DATA_SIZE) * 100).toFixed(2)}%`
+  );
   stop();
 
   fs.writeFileSync(
