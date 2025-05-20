@@ -9,7 +9,8 @@
     "merge-data": "npx ts-node ./mergeData.spec.ts",
     "start": "npm run get-users && npm run get-repos && npm run get-csv && npm run merge-data",
     "resume:repos": "npm run get-repos && npm run get-csv && npm run merge-data",
-    "resume:csv": "npm run get-csv && npm run merge-data"
+    "resume:csv": "npm run get-csv && npm run merge-data",
+    "check-tokens": "npx ts-node ./checkTokens.ts"
   },
   "keywords": [],
   "author": "",
