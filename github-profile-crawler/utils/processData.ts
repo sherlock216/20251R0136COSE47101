@@ -43,7 +43,7 @@ const processData = async (
     if (totalCount > 0) {
       for (const lang of languages) {
         languageCount[lang] = Number(
-          (languageCount[lang] / totalCount).toFixed(2)
+          (languageCount[lang] / totalCount).toFixed(3)
         );
       }
     } else {
