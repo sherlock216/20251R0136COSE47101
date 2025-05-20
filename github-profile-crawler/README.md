@@ -19,7 +19,7 @@ ID_PRESET=50000000
 - `npm run get-csv` ㄱㄱ (위에꺼 두개 먼저 해야됨)
 - 세 번 연달아 입력하기 귀찮으면 `npm run start` 입력하면 알아서 해줌
 
-## 전반적 프로세스
+## 전반적 프로세스 (v1)
 
 1.  `npm run get-users` 하면 크롤링 할 유저 리스트업. ID_PRESET으로 부터 DATA_SIZE만큼의 유저를 긁어옴
 2.  유저 타입 organization이면 제외하고 `users.json`으로 저장함
@@ -27,6 +27,15 @@ ID_PRESET=50000000
 4.  만약에 본인 레포가 3개 미만이면 컷, `userDataWithRepos.json`으로 저장
 5.  여기까지 남은 유저들을 순회하면서 그 사람의 언어 비율 통계를 냄. 만약에 우리가 수집하는 언어를 전혀 안 쓴 사람이면 컷.
 6.  CSV 파일로다가 `github_profiles_{id 구간}`으로 저장됨
+
+## 전반적 프로세스 (v2)
+
+1.  크롤링 할 유저 리스트업. ID_PRESET으로 부터 DATA_SIZE만큼의 유저를 긁어옴
+2.  유저 타입 organization이면 제외하고 `users_v2_{id 구간}.json`으로 저장함
+3.  각 유저별로 반복 돌면서 그 사람 레포지토리 긁어옴. 이때 레포는 크기가 500 이상이고 우리가 수집하는 언어에 해당하는 것만 수집.
+4.  만약에 이렇게 긁어온 레포가 3개 미만이면 컷, `userDataWithRepos_v2_{id 구간}.json`으로 저장
+5.  여기까지 남은 유저들을 순회하면서 그 사람의 언어 비율 통계를 냄.
+6.  CSV 파일로다가 `github_profiles_v2_{id 구간}`으로 저장됨
 
 ## CSV Elements
 
