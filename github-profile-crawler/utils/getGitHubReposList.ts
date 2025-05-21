@@ -5,9 +5,13 @@ const fetchData = async (
   uri: string
 ): Promise<GitHubRepository[] | { message: string }> => {
   const response = await fetch(uri, getRequestHeader());
-
   if (response.status !== 200) {
     return { message: 'Failed to fetch repositories' };
+  }
+  const remaining = response.headers.get('x-ratelimit-remaining');
+
+  if (Number(remaining) % 10 === 0) {
+    console.log(`남은 API 호출 횟수: ${remaining}`);
   }
 
   return response.json();

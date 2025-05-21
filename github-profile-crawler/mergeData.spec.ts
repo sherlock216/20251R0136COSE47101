@@ -5,13 +5,13 @@ async function main() {
   console.log('🚀 CSV 파일들을 합치는 중이에요!');
 
   const resultsDir = 'results';
-  const outputFile = path.join(resultsDir, 'github_profiles.csv');
+  const outputFile = path.join(resultsDir, 'github_profiles_total_v2.csv');
 
   // results 디렉토리에서 github_profiles로 시작하는 CSV 파일들을 찾습니다
   const files = fs
     .readdirSync(resultsDir)
     .filter(
-      file => file.startsWith('github_profiles') && file.endsWith('.csv')
+      file => file.startsWith('github_profiles_v2') && file.endsWith('.csv')
     );
 
   if (files.length === 0) {

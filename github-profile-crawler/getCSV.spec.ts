@@ -1,15 +1,18 @@
 import fs from 'fs';
-import 'dotenv/config';
 
 import { UsersDataWithRepos } from './types';
 import processData from './utils/processData';
 import { saveToCSV } from './utils/saveToCSV';
+import { DATA_SIZE, ID_PRESET } from './getEnv';
 
 async function main() {
   console.log('🚀 CSV파일을 생성해요!');
 
   const userList: UsersDataWithRepos[] = JSON.parse(
-    fs.readFileSync('results/userDataWithRepos.json', 'utf8')
+    fs.readFileSync(
+      `results/userDataWithRepos_v2_${ID_PRESET}_${ID_PRESET + DATA_SIZE}.json`,
+      'utf8'
+    )
   );
 
   if (userList === undefined || userList.length === 0) {
@@ -21,7 +24,7 @@ async function main() {
 
   saveToCSV({
     profiles: processedData,
-    startIndex: Number(process.env.ID_PRESET || '58812280'),
+    startIndex: ID_PRESET,
     endIndex: userList[userList.length - 1].id,
   });
 }

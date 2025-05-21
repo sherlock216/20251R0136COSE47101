@@ -13,12 +13,14 @@ export const saveToCSV = async ({
   endIndex,
 }: SaveToCSVProps) => {
   // 헤더 열 정의
-  let csvContent = `유저 ID, ${languages.join(', ')}\n`;
+  let csvContent = `user_ID, username, repo_count, ${languages.join(', ')}\n`;
 
   // 프로필 추가
   for (const profile of profiles) {
     const row = [
+      profile.userID,
       profile.username,
+      profile.repoCount,
       ...languages.map(language => profile[language]),
     ].join(',');
     csvContent += `${row}\n`;
@@ -26,7 +28,7 @@ export const saveToCSV = async ({
 
   // root 디렉토리에 저장하기
   const filePath = path.join(
-    `./results/github_profiles_${startIndex}-${endIndex}.csv`
+    `./results/github_profiles_v2_${startIndex}-${endIndex}.csv`
   );
 
   fs.writeFileSync(filePath, csvContent);

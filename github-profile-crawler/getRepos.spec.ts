@@ -1,15 +1,18 @@
 import fs from 'fs';
-import 'dotenv/config';
 
-import { GitHubRepository, GitHubUser, UsersDataWithRepos } from './types';
+import { GitHubUser, isLanguage, UsersDataWithRepos } from './types';
 import stopWatch from './utils/stopWatch';
 import { getGitHubReposList } from './utils/getGitHubReposList';
+import { DATA_SIZE, ID_PRESET } from './getEnv';
 
 async function main() {
   console.log('🚀 유저 별 레포지토리 목록을 추가해요!');
 
   const userList: GitHubUser[] = JSON.parse(
-    fs.readFileSync('results/users.json', 'utf8')
+    fs.readFileSync(
+      `results/users_v2_${ID_PRESET}_${ID_PRESET + DATA_SIZE}.json`,
+      'utf8'
+    )
   );
 
   if (userList === undefined || userList.length === 0) {
@@ -31,26 +34,27 @@ async function main() {
     );
 
     const repos = await getGitHubReposList(user.repos_url);
-    const filteredRepos = repos.filter(repo => repo.size > 500);
-    if (filteredRepos.length < 3) continue;
-    const starredRepos = await getGitHubReposList(
-      user.starred_url.split('{')[0]
+    const filteredRepos = repos.filter(
+      repo =>
+        repo.size > 500 && repo.language !== null && isLanguage(repo.language)
     );
-    const filteredStarredRepos = starredRepos.filter(repo => repo.size > 500);
+    if (filteredRepos.length < 3) continue;
     usersDataWithRepos.push({
       ...user,
-      repos: filteredRepos.slice(0, 10),
-      starredRepos: filteredStarredRepos.slice(0, 10),
+      repos: filteredRepos,
     });
   }
 
   console.log(
     `${userList.length}개의 유저 데이터 중 유효한 ${usersDataWithRepos.length}개의 프로필을 크롤링했어요!`
   );
+  console.log(
+    `수율: ${((usersDataWithRepos.length / DATA_SIZE) * 100).toFixed(2)}%`
+  );
   stop();
 
   fs.writeFileSync(
-    'results/userDataWithRepos.json',
+    `results/userDataWithRepos_v2_${ID_PRESET}_${ID_PRESET + DATA_SIZE}.json`,
     JSON.stringify(usersDataWithRepos, null, 2)
   );
 }

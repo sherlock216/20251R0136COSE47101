@@ -32,11 +32,6 @@ const processData = async (
     };
     for (const repo of user.repos) {
       if (repo.language && isLanguage(repo.language)) {
-        languageCount[repo.language] += 10;
-      }
-    }
-    for (const repo of user.starredRepos) {
-      if (repo.language && isLanguage(repo.language)) {
         languageCount[repo.language] += 1;
       }
     }
@@ -48,7 +43,7 @@ const processData = async (
     if (totalCount > 0) {
       for (const lang of languages) {
         languageCount[lang] = Number(
-          (languageCount[lang] / totalCount).toFixed(2)
+          (languageCount[lang] / totalCount).toFixed(3)
         );
       }
     } else {
@@ -58,6 +53,8 @@ const processData = async (
     ret.push({
       ...languageCount,
       username: user.login,
+      userID: user.id,
+      repoCount: user.repos.length,
     });
   }
 
